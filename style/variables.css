@@ -1,0 +1,39 @@
+html {
+    
+    /*colors*/
+    
+    --color_accent_blue: #09d8c6;
+    --color_accent_red: #b00925;
+    
+    --color_dark_blue: #0e1a30;
+    --color_dark_red: #450a1c;
+    
+    --color_dusk_red: #402038;
+    --color_dusk_blue: #173750;
+    
+    --color_darker_dusk_red: #321a2c;
+    --color_darker_dusk_blue: #0f2332;
+    
+    --color_white: #dfdfdf;
+    --color_light: #979797;
+    --color_gray: #303032;
+    --color_black: #0e0e0e;
+    
+    --color_warning: #da8427;
+    --color_yellow: #dab427;
+    --color_danger: #bf312e;
+    --color_success_green: #6dcc37;
+    --color_success_blue: #39c79e;
+
+    /* measurements */
+
+    --acnt: #8E58A6;
+    --sec: #F0DCF2;
+    --font: #1b1b1b;
+
+    --mm05: calc(var(--mm) / 2);
+    --mm: 1.2rem;
+    --mm2: calc(var(--mm) * 2);
+    --mm3: calc(var(--mm) * 3);
+    --mm4: calc(var(--mm) * 4);
+}

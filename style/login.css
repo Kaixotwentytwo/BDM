@@ -1,0 +1,50 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --accent: var(--color_dusk_blue);
+    --accent-l: oklch(from var(--accent) calc(l + 0.25) c h);
+    --accent-ll: oklch(from var(--accent) calc(l + 0.5) c h);
+    --accent-lll: oklch(from var(--accent) calc(l + 0.75) c h);
+    --back: var(--color_gray);
+}
+
+body {
+    background: var(--back) !important;
+}
+
+header {
+    display: block;
+    height: fit-content;
+    min-height: calc(1ch + var(--mm) * 1);
+    position: relative;
+    color: var(--accent-ll);
+}
+
+header .logo svg {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    height: calc(1ch + var(--mm));
+}
+
+header .logoHitbox,
+header .logoHitbox * {
+    cursor: pointer;
+    user-select: none;
+    transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+header .logoHitbox:hover {
+    scale: 1.1;
+    color: var(--accent-lll);
+}
+
+@media (prefers-color-scheme: light) {
+    body.themed {background: oklch(from var(--back) calc(l + 0.6) c h) !important}
+    .themed[color="white"] {color:var(--color_black);}
+    .themed-ind {color: var(--lt-color) !important;}
+    .themed[bgcolor="darkBlue"] {background-color: var(--accent-l);}
+}

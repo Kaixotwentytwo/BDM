@@ -1,0 +1,345 @@
+html, body { margin: 0; padding: 0; }
+
+:root {
+    --accent: var(--acnt);
+    --accent-l: oklch(from var(--accent) calc(l + 0.25) c h);
+    --accent-ll: oklch(from var(--accent) calc(l + 0.5) c h);
+    --accent-lll: oklch(from var(--accent) calc(l + 0.75) c h);
+    --surface: #ffffff;
+    --surface-2: #f7f7f8;
+    --border: #e4e4e7;
+    --text: #1b1b1b;
+    --text-muted: #71717a;
+    --radius: 22px;
+    --radius-sm: 10px;
+    --shadow: 0 10px 40px -10px rgba(0,0,0,.18);
+    --gap: 1.6rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --surface: #1c1c1f;
+        --surface-2: #26262b;
+        --border: #34343a;
+        --text: #f4f4f5;
+        --text-muted: #a1a1aa;
+        --shadow: 0 10px 40px -10px rgba(0,0,0,.6);
+    }
+}
+
+*[hidden] {
+    display: none !important;
+}
+
+hr {
+    width: 100%;
+    border: none;
+    border-top: 2px solid var(--accent-ll);
+    opacity: 0.3;
+    padding: calc(-1 * var(--gap) / 2) 0;
+    margin: calc(-1 * var(--gap) / 2) 0;
+}
+
+body.themed {
+    background: 
+        radial-gradient(circle at 20% 0%, oklch(0.32 0.06 312.92) 0%, transparent 45%),
+        radial-gradient(circle at 100% 100%, oklch(0.36 0.03 333.46) 0%, transparent 40%),
+        var(--surface-2);
+    min-height: 100vh;
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+header {
+    display: block;
+    height: fit-content;
+    min-height: calc(1ch + var(--mm) * 1);
+    position: relative;
+    color: var(--accent-ll);
+    backdrop-filter: blur(10px);
+    background: linear-gradient(339deg, var(--acnt), transparent);
+}
+
+header .logo svg {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    height: calc(1ch + var(--mm));
+}
+
+header .logoHitbox,
+header .logoHitbox * {
+    cursor: pointer;
+    user-select: none;
+    transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+header .logoHitbox:hover {
+    scale: 1.075;
+    color: var(--accent-l);
+}
+
+#wrapper {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--mm2) var(--mm);
+    box-sizing: border-box;
+}
+
+#reg-form {
+    width: 100%;
+    max-width: 460px;
+    background: var(--surface);
+    padding: 2.2rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    box-sizing: border-box;
+}
+
+/* Header */
+.form-header { text-align: center; }
+.form-header h1 {
+    margin: 0 0 .35rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--text);
+}
+.form-header .subtitle {
+    margin: 0;
+    font-size: .95rem;
+    color: var(--text-muted);
+}
+
+/* Groups */
+.form-group { display: flex; flex-direction: column; gap: .75rem; }
+.group-label {
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-muted);
+}
+
+/* Radio cards */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .6rem;
+}
+.radio-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    padding: .9rem .5rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    background: var(--surface);
+    transition: all .2s ease;
+    user-select: none;
+}
+.radio-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.radio-card:hover {
+    border-color: var(--accent-l);
+    transform: translateY(-2px);
+}
+.radio-card input:checked ~ .radio-mark,
+.radio-card input:checked ~ .radio-text,
+.radio-card input:checked ~ .radio-icon {
+    color: var(--accent);
+}
+.radio-card:has(input:checked) {
+    border-color: var(--accent);
+    background: oklch(from var(--accent) calc(l + 0.9) c h);
+    box-shadow: 0 0 0 3px oklch(from var(--accent) calc(l + 0.75) c h);
+}
+.radio-mark { display: none; }
+.radio-text {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+.radio-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--text-muted);
+    transition: color .2s ease;
+}
+
+/* Inputs with floating labels */
+.input-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.input-wrap input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.1rem .9rem .5rem;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.input-wrap input:hover { border-color: var(--accent-l); }
+.input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px oklch(from var(--accent) calc(l + 0.75) c h);
+}
+.input-wrap label {
+    position: absolute;
+    left: .9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all .18s ease;
+    background: var(--surface);
+    padding: 0 .3rem;
+}
+.input-wrap input:focus + label,
+.input-wrap input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+/* Password toggle */
+.password-wrap input { padding-right: 3rem; }
+.toggle-pass {
+    position: absolute;
+    right: .6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+.toggle-pass:hover {
+    background: var(--surface-2);
+    color: var(--accent);
+}
+.toggle-pass svg { width: 20px; height: 20px; }
+.toggle-pass.active { color: var(--accent); }
+.toggle-pass.active svg { opacity: .55; }
+
+/* Show password checkbox */
+.show-pass-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: var(--text-muted);
+}
+.show-pass-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+.show-pass-row label { cursor: pointer; user-select: none; }
+
+/* Submit button */
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), oklch(from var(--accent) calc(l - 0.12) c h));
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .25s ease, filter .2s ease;
+    box-shadow: 0 8px 20px -6px oklch(from var(--accent) l c h / .5);
+    margin-top: .4rem;
+}
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -6px oklch(from var(--accent) l c h / .6);
+    filter: brightness(1.05);
+}
+.submit-btn:active { transform: translateY(0); }
+.submit-btn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform .2s ease;
+}
+.submit-btn:hover svg { transform: translateX(4px); }
+
+#backGuestButton {
+    transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: var(--mm);
+    padding-left: calc(var(--mm) + 2ch);
+    max-width: 20ch;
+    user-select: none;
+    cursor: pointer;
+    top: calc(var(--mm2) + 2rem + var(--mm));
+}
+
+#backGuestButton:hover {
+    padding-left: calc(var(--mm) + 4ch);
+    color: var(--accent-l);
+    scale: 1.1;
+}
+
+#backGuestButton:hover::before {
+    scale: 1.25;
+}
+
+#backGuestButton::before {
+    transition: .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute;
+    content: '◄ ';
+    translate: -2.5ch 1ch;
+    top: var(--mm);
+}
+
+.transparentButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    justify-self: center;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    #wrapper {margin: 0; padding: 0;}
+    #reg-form { padding: 1.6rem 1.2rem; }
+    .radio-group { grid-template-columns: 1fr; }
+    .radio-card { flex-direction: row; justify-content: flex-start; padding: .85rem 1rem; }
+    .form-header h1 { font-size: 1.5rem; }
+}
